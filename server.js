@@ -1,33 +1,44 @@
-// var http = require("http");
+var express = require('express');
+var app = express();
 
-// function onRequest(request, response){
-// 	console.log("Request received!");
-// 	response.writeHead(200,{"Conten-Type": "text/plain"});
-// 	setTimeOutToRefeshServer(response, 5000);
-// 	//response.write("Hello World");
-// 	response.end();
-// }
+app.get('/index.html', function (req, res) {
+   res.sendFile( __dirname + "/" + "index.html" );
+})
 
-// function setTimeOutToRefeshServer(response, time){
-// 	setTimeout(function(){
-// 		response.write("Dog is done");
-// 		response.end();
-// 	},time);
-// }
+// This responds with "Hello World" on the homepage
+app.get('/', function (req, res) {
+   console.log("Got a GET request for the homepage");
+   res.send('Hello GET');
+})
 
-// http.createServer(onRequest).listen(11111);
-// console.log("Server has started!");
+// This responds a POST request for the homepage
+app.post('/', function (req, res) {
+   console.log("Got a POST request for the homepage");
+   res.send('Hello POST');
+})
 
-var http = require('http');
+// This responds a DELETE request for the /del_user page.
+app.delete('/del_user', function (req, res) {
+   console.log("Got a DELETE request for /del_user");
+   res.send('Hello DELETE');
+})
 
-http.createServer(function(request, response){
-	response.writeHead(200);
-	response.write("Dog is running.");
+// This responds a GET request for the /list_user page.
+app.get('/list_user', function (req, res) {
+   console.log("Got a GET request for /list_user");
+   res.send('Page Listing');
+})
 
-	setTimeout(function(){
-		response.write("Dog is Done.");
-		response.end();
-	},5000);
-}).listen(11111);
+// This responds a GET request for abcd, abxcd, ab123cd, and so on
+app.get('/ab*cd', function(req, res) {   
+   console.log("Got a GET request for /ab*cd");
+   res.send('Page Pattern Match');
+})
 
-console.log("Server has started!");
+var server = app.listen(8081, function () {
+
+   var host = server.address().address
+   var port = server.address().port
+
+   console.log("Example app listening at http://%s:%s", host, port)
+})
