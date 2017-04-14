@@ -1,0 +1,22 @@
+{
+  "name": "clear",
+  "version": "1.0.0",
+  "description": "crud express mongledb",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Nguyen Tai Hanh",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "mongodb": "^2.2.25"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
