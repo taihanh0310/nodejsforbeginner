@@ -6,12 +6,17 @@ const MongoClient = require('mongodb').MongoClient;
 //https://zellwk.com/blog/crud-express-mongodb/
 //https://zellwk.com/blog/crud-express-and-mongodb-2/
 // https://mlab.com/databases/star-wars-quotes/collections/quotes
+// https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
 
 // set view engine
 app.set('view engine', 'ejs');
+
+// Map folder public
+app.use(express.static('public'));
 // Once the view engine is set, we can begin generating the HTML with our quotes.
 
 var db;
+
 MongoClient.connect('mongodb://admin:123456@ds161400.mlab.com:61400/star-wars-quotes', (err, database) => {
 	if(err) {
 		return console.log(err);
@@ -23,6 +28,7 @@ MongoClient.connect('mongodb://admin:123456@ds161400.mlab.com:61400/star-wars-qu
 		console.log('listening on 3000');
 	});
 
+	/* get action */
 	app.get('/', function(request, response){
 		var cursor = db.collection('quotes').find().toArray(function(err, results) {
 		  	if (err)
